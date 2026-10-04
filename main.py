@@ -1,12 +1,18 @@
 import numpy as np
-from utils import to_ref
+
+from ms1017.lab.sample import Sample
+from ms1017.lab.analysis import analyze_specific
+from ms1017.lab.analysis import analyze_general
+
 
 def main():
-    A = np.array([[1, 2, 3, 8],
-                  [4, 5, 6, 6],
-                  [7, 8, 9, 0]])
 
-    print(to_ref(A))
+    a = Sample('A', "./data/sample_a.csv", np.float32(1.32), np.float32(76.2), np.float32(3.14))
+    b = Sample('B', "./data/sample_b.csv", np.float32(1.94), np.float32(76.2), np.float32(3.15))
+    c = Sample('C', "./data/sample_c.csv", np.float32(1.19), np.float32(76.2), np.float32(3.14))
+    d = Sample('D', "./data/sample_d.csv", np.float32(1), np.float32(76.2), np.float32(3.17))
+
+    print(analyze_specific(d))
 
 if __name__ == '__main__':
     main()

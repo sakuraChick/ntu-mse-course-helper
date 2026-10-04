@@ -72,6 +72,8 @@ def to_ref(A: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
 def to_rref(A: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
     pass
 
+"""Assist methods"""
+
 def _swap(A: npt.NDArray[np.float64], k: int, l: int) -> None:
     """
     :param A: the matrix

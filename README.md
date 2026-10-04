@@ -6,6 +6,18 @@ $$A = A_0 e^{\frac{-E}{const \space T}}$$
 
 Functions provided for calculating $A$, $E$ and $T$.
 
+### Gaussian Elimination
+
+$$\begin{bmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i \end{bmatrix}
+\longrightarrow
+\begin{bmatrix}
+a & b & c \\
+0 & j & k \\
+0 & 0 & l \end{bmatrix}$$
+To upper triangular form (or row echelon form). $A\rightarrow U$.
 ## MS1017
 
 ### Bragg's Law
