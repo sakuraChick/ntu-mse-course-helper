@@ -1,3 +1,7 @@
+## Documents
+
+MS1017 lab report: [MS1017_20260922_lab_report.md](/doc/MS1017_20260922_lab_report.md)
+
 ## General
 
 ### Boltzmann Distribution
