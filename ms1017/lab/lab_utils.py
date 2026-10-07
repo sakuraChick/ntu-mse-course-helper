@@ -3,13 +3,13 @@ import numpy as np
 
 
 @dataclass
-class YieldDataPack:
+class YieldResult:
     label: str
-    E: np.float32
-    m: np.float32
-    yield_strain: np.float32
-    yield_stress: np.float32
-    yield_index: int
+    E: float
+    m: float
+    r2: float
+    start_idx: int
+    end_idx: int
 
 def linear_generator_with_offset(E: np.float32, m: np.float32):
     OFFSET = 0.002

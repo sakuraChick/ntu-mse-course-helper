@@ -4,8 +4,11 @@ from .data_plotter import DataPlotter
 
 
 def analyze_specific(s: Sample) -> str:
-    pack = DataProcessor.analyze_yield(s)
-    DataPlotter.plot_in_yield(s, pack.E, pack.m, pack.yield_index+10, pack.yield_strain, pack.yield_stress)
+    res, e, strain = DataProcessor.sliding_slopes(s, lo=0.0)
+    result = DataProcessor.find_modulus(s, lo=0)
+    yield_e, yield_s, yield_i = DataProcessor.find_yield(s, result)
+    DataPlotter.plot_check(e, strain, res)
+    DataPlotter.plot_in_yield(s, result.E, result.m, yield_i + 20, yield_e, yield_s)
 
     return (f"========================================\n"
             f"Sample {s.label}:\n"
@@ -16,8 +19,8 @@ def analyze_specific(s: Sample) -> str:
             f"\tthickness: {s.thickness:2f} mm\n"
             f"----------------------------------------\n"
             f"Yield Performance:\n"
-            f"\tYoung's modulus: {pack.E * 0.001:3f} GPa\n"
-            f"\tyield stress: {pack.yield_stress:3f} MPa\n"
+            f"\tYoung's modulus: {result.E * 0.001:3f} GPa\n"
+            f"\tyield stress: {result.yield_stress:3f} MPa\n"
             f"----------------------------------------\n"
             f"Limit Performance:\n"
             f"\ttensile strength: {DataProcessor.analyze_tensile_strength(s):3f} MPa\n"
@@ -25,7 +28,3 @@ def analyze_specific(s: Sample) -> str:
             f"\tductility: {DataProcessor.analyze_ductility(s):5f}%\n"
             f"\ttoughness: {DataProcessor.analyze_toughness(s):6f} MPa\n"
             f"========================================")
-
-
-def analyze_general(s: Sample, *args: Sample):
-    DataPlotter.plot_stress_to_strain(s, *args)

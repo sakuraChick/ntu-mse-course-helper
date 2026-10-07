@@ -1,8 +1,9 @@
 import numpy as np
 
+from ms1017.lab.data_plotter import DataPlotter
+from ms1017.lab.data_processor import DataProcessor
 from ms1017.lab.sample import Sample
 from ms1017.lab.analysis import analyze_specific
-from ms1017.lab.analysis import analyze_general
 
 
 def main():
@@ -12,7 +13,12 @@ def main():
     c = Sample('C', "./data/sample_c.csv", np.float32(1.19), np.float32(76.2), np.float32(3.14))
     d = Sample('D', "./data/sample_d.csv", np.float32(1), np.float32(76.2), np.float32(3.17))
 
-    print(analyze_specific(d))
+    res, e, s= DataProcessor.sliding_slopes(d, lo=0.0)
+    result = DataProcessor.find_modulus(d, lo=0)
+    yield_e, yield_s, yield_i = DataProcessor.find_yield(d, result)
+    print(result.E)
+    DataPlotter.plot_check(e, s, res)
+    DataPlotter.plot_in_yield(d, result.E, result.m, yield_i+20, yield_e, yield_s)
 
 if __name__ == '__main__':
     main()

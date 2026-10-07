@@ -28,7 +28,7 @@ class DataPlotter:
 
     @staticmethod
     def plot_in_yield(s: Sample, E: np.float32, m: np.float32, yield_index: int, yield_strain: np.float32, yield_stress: np.float32):
-        x_hat = np.linspace(0.002, s.strain[yield_index], 100 )
+        x_hat = np.linspace(0.002, s.strain[yield_index], 100)
         y_hat = linear_generator_with_offset(E, m)(x_hat)
 
         plt.figure(figsize=(5, 8))
@@ -38,7 +38,7 @@ class DataPlotter:
 
         plt.scatter(yield_strain, yield_stress, s=20, color="black")
         plt.annotate(
-            f"({yield_strain:2f}, {yield_stress:2f})",
+            f"({yield_strain}, {yield_stress})",
             (yield_strain, yield_stress),
             xytext=(-125, 10),
             textcoords="offset points"
@@ -53,16 +53,15 @@ class DataPlotter:
         plt.show()
 
     @staticmethod
-    def E_2_sigma(sigmas: npt.NDArray, Es: npt.NDArray):
-        plt.figure(figsize=(8, 5))
-
-        plt.plot(sigmas, Es, color='blue')
-
-        plt.title("Trend of Young's Modulus to strain")
-
-        plt.xlabel("Strain")
-        plt.ylabel("Young's Modulus / MPa")
-
+    def plot_check(strain, stress, res):
+        fig, ax = plt.subplots(3, 1, figsize=(7, 9), sharex=True)
+        ax[0].plot(strain, stress, lw=1)
+        ax[0].set_ylabel("Stress (MPa)")
+        ax[1].plot(res[:, 0], res[:, 1], "-", ms=3)
+        ax[1].set_ylabel("Window slope (E, MPa)")
+        ax[2].plot(res[:, 0], res[:, 2], "-", ms=3)
+        ax[2].set_ylabel("R²")
+        ax[2].set_xlabel("Strain")
         plt.tight_layout()
         plt.show()
 

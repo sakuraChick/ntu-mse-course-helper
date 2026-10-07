@@ -20,7 +20,7 @@ Shows the distance from point $(0, 0, 0)$ to plane $hx + ky + lz = a$
 
 ### Arrhenius's Law
 
-This is a _inheritance_ of Boltzmann distribution.
+This is an _inheritance_ of Boltzmann distribution.
 
 $$\frac{n}{N} = \exp{\frac{-Q_v}{k_bT}}$$
 
